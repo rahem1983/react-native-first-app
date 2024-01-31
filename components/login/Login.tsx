@@ -34,6 +34,7 @@ const navigation = useNavigation<any>();
         <TextInput
           style={styles.input}
           placeholder="User id"
+          placeholderTextColor="#76B1E9"
           // value=''
           onChangeText={(text)=>setUserName(text)}
         // Other TextInput props go here
@@ -41,6 +42,7 @@ const navigation = useNavigation<any>();
         <TextInput
           style={styles.input}
           placeholder="Password"
+          placeholderTextColor="#76B1E9"
           // value=''
           secureTextEntry
           onChangeText={(text)=>setPassword(text)}
@@ -81,7 +83,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 5,
     fontSize: 17,
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
+    color:'#212325',
   },
   submitButton: {
     backgroundColor: '#3498db',

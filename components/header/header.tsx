@@ -16,7 +16,7 @@ import {
 
 import Icon from 'react-native-vector-icons/Fontisto';
 import SearchIcon from 'react-native-vector-icons/Fontisto';
-import IconAnt from 'react-native-vector-icons/AntDesign'
+import IconAnt from 'react-native-vector-icons/MaterialCommunityIcons'
 
 
 
@@ -48,40 +48,40 @@ const Header = () => {
 
     const fetchNotes = async () => {
         try {
-          const response = await fetch('http://10.11.200.109:3050/notes');
-          const data = await response.json();
-          if (response.ok) {
-    
-            setCardData(data)
-    
-          } else {
-            throw new Error(`Error fetching notes: ${response.status}`);
-          }
-        } catch (error) {
-          console.error('Error fetching notes:', error);
-        }
-      };
+            const response = await fetch('http://10.11.200.109:3050/notes');
+            const data = await response.json();
+            if (response.ok) {
 
-    const deleteNote = async (noteId:any) =>  {
-        try {
-          const response = await fetch(`http://10.11.200.109:3050/notes/${noteId}`, {
-            method: 'DELETE',
-            headers: {
-              'Accept': 'application/json' // Optional, but consistent with curl
+                setCardData(data)
+
+            } else {
+                throw new Error(`Error fetching notes: ${response.status}`);
             }
-          });
-      
-          if (response.ok) {
-            console.log('Note deleted successfully!');
-            // Perform actions for successful deletion (e.g., update UI)
-          } else {
-            throw new Error(`Error deleting note: ${response.status}`);
-          }
         } catch (error) {
-          console.error('Error deleting note:', error);
-          // Handle error appropriately (e.g., display error message)
+            console.error('Error fetching notes:', error);
         }
-      }
+    };
+
+    const deleteNote = async (noteId: any) => {
+        try {
+            const response = await fetch(`http://10.11.200.109:3050/notes/${noteId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json' // Optional, but consistent with curl
+                }
+            });
+
+            if (response.ok) {
+                console.log('Note deleted successfully!');
+                // Perform actions for successful deletion (e.g., update UI)
+            } else {
+                throw new Error(`Error deleting note: ${response.status}`);
+            }
+        } catch (error) {
+            console.error('Error deleting note:', error);
+            // Handle error appropriately (e.g., display error message)
+        }
+    }
 
     return (
         <View style={styles.header}>
@@ -100,6 +100,7 @@ const Header = () => {
                         <TextInput
                             style={styles.dateInput}
                             placeholder="mm/dd/yyyy"
+                            placeholderTextColor="#76B1E9"
                             value={chosenDate}
                         // onChangeText={setChosenDate}
                         />
@@ -118,25 +119,26 @@ const Header = () => {
                         value={searchQuery}
                         onChangeText={setSearchQuery}
                         placeholder=" Title"
+                        placeholderTextColor="#76B1E9"
                     />
                     <TouchableOpacity style={styles.createButton} onPress={fetchNotes}>
                         <Text style={styles.buttonText}>Search</Text>
                     </TouchableOpacity>
                     <View style={styles.cardsContainer}>
-                        <ScrollView style={{ marginBottom: 200 }}>
+                        <ScrollView style={{ marginBottom: 320 }}>
                             {cardData.map((cards: any) => (
 
                                 <View key={cards.id} style={[styles.card, { flexDirection: 'row', }]}>
                                     <View>
                                         <Text style={styles.cardHeader}>{cards.title}</Text>
-                                        <Text>Date: {cards.createdAt.slice(0, 10)}</Text>
+                                        <Text style={{color:'#666'}}>Date: {cards.createdAt.slice(0, 10)}</Text>
                                         <Text style={styles.description}>{cards.desc}</Text>
                                     </View>
                                     <View style={styles.deleteBtn}>
                                         <Text >
                                             <IconAnt
-                                                style={{ color: 'red' }}
-                                                name='delete'
+                                                style={{ color: '#FF7E7E' }}
+                                                name='delete-circle-outline'
                                                 size={40}
                                                 onPress={() => deleteNote(cards.id)} />
                                         </Text>
@@ -192,6 +194,8 @@ const styles = StyleSheet.create({
         elevation: 4,
     },
     dateInput: {
+        color: 'black',
+
         height: 40,
         width: '85%',
         borderRadius: 5,
@@ -204,6 +208,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
     },
     input: {
+        color: 'black',
         fontSize: 17,
         padding: 8,
         borderRadius: 4,
@@ -237,28 +242,30 @@ const styles = StyleSheet.create({
     card: {
         marginBottom: 10,
         borderRadius: 10,
-        backgroundColor: '#fff', // White background for cards
+        backgroundColor: '#E0E9F1', // White background for cards
         padding: 15,
         shadowColor: '#ccc', // Subtle shadow for depth
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.2,
         shadowRadius: 2,
-    },
-    cardHeader: {
+        // color:"#586573"
+      },
+      cardHeader: {
         fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 5,
-    },
-    description: {
+        color: "#666"
+      },
+      description: {
         fontSize: 14,
         color: '#666',
-        width: 200 // Light gray for less important content
-    },
-    deleteBtn: {
-        display: 'flex', 
-        marginLeft: 100,
-        marginTop: 15,
+        width:200 // Light gray for less important content
       },
+    deleteBtn: {
+        display: 'flex',
+        marginLeft: 120,
+        marginTop: 15,
+    },
 });
 
 export default Header;
