@@ -37,7 +37,7 @@ const Header = () => {
     };
 
     const searchNote = () => { }
-    const showDatepicker = () => {
+    const showDatepicker = () => { 
         DateTimePickerAndroid.open({
             value: new Date(),
             onChange,
@@ -110,7 +110,6 @@ const Header = () => {
                             size={42}
                             color="gray"
                             style={{ color: '#3498db', marginTop: 6 }}
-
                         />
 
                     </View>

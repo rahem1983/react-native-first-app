@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 
 import IconAnt from 'react-native-vector-icons/MaterialCommunityIcons'
-import Header from '../header/header';
+import Header from '../header/Header';
+import LeadintgScreen from '../loader/LoadingScreen';
 
 const Dashboard = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [cardData, setCardData] = useState<any>([]);
+  const [loading,setloading] = useState<any>(true);
+  const [toggle, setToggle] = useState<boolean>(true);
 
 
 
@@ -46,6 +49,7 @@ const Dashboard = () => {
         console.log('Note created successfully!', data);
         setTitle('')
         setDescription('')
+        setToggle(!toggle)
         // Handle successful response, e.g., display a success message or redirect
       } else {
         throw new Error(`Error creating note: ${response.status}`);
@@ -78,9 +82,27 @@ const Dashboard = () => {
     }
   }
 
+  const fetching = () =>{
+    setloading(false)
+  }
+
   useEffect(() => {
-    fetchNotes()
-  }, [postNote])
+    fetchNotes();
+
+    setTimeout(
+      fetching
+    , 4000);
+  }, [toggle])
+
+  if(loading)
+  {
+    return (
+      <>
+      <LeadintgScreen/>
+      </>
+    )
+  }
+  else
   return (
     <>
       <Header/>

@@ -19,14 +19,14 @@ const navigation = useNavigation<any>();
     const [password, setPassword] = useState("lulu")
     const clicks= (uName: any, pWord: any)=>{
 
-      // navigation.navigate("Dashboard")
+      navigation.navigate("Dashboard")
 
-        if (uName === "rhm" && pWord === "123") {
-          navigation.navigate("Dashboard")
-        }
-        else{
-          console.warn("Wrong Credential")
-        }
+        // if (uName === "rhm" && pWord === "123") {
+        //   navigation.navigate("Dashboard")
+        // }
+        // else{
+        //   console.warn("Wrong Credential")
+        // }
     }
   return (
     <View style={styles.container}>
