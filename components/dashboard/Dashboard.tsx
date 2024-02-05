@@ -3,7 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 
 
 import IconAnt from 'react-native-vector-icons/MaterialCommunityIcons'
 import Header from '../header/Header';
-import LeadintgScreen from '../loader/LoadingScreen';
+import LoadingScreen from '../loader/LoadingScreen';
 
 const Dashboard = () => {
   const [title, setTitle] = useState('');
@@ -91,14 +91,14 @@ const Dashboard = () => {
 
     setTimeout(
       fetching
-    , 4000);
+    , 2000);
   }, [toggle])
 
   if(loading)
   {
     return (
       <>
-      <LeadintgScreen/>
+      <LoadingScreen/>
       </>
     )
   }
